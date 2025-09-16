@@ -53,8 +53,6 @@ int main(int argc, char const *argv[])
                 if (line.empty()) {  
             break;  
             }
-
-
                 std::vector<std::string> v = split(line, '\t');
                 ip_pool.push_back(split(v.at(0), '.'));
             }
@@ -137,14 +135,15 @@ for(int a=0; a<1000; ++a)
             }
             std::cout << std::endl;
         }
-
+        std::cout << "->----------------" << std::endl;
         for(std::vector<std::vector<std::string> >::const_iterator ip = ip_pool.cbegin(); ip != ip_pool.cend(); ++ip)
         {
             bool rele = false;
+            int ip_bate;
             for(std::vector<std::string>::const_iterator ip_part = ip->cbegin(); ip_part != ip->cend(); ++ip_part)
             {                
                 std::string str = *ip_part;
-                int ip_bate = atoi(str.c_str());
+                ip_bate = atoi(str.c_str());
                 if((ip_bate == 1) || (rele == true))
                 {
                     if (ip_part != ip->cbegin())
@@ -156,20 +155,21 @@ for(int a=0; a<1000; ++a)
                 }
                 else break;
             }
-            std::cout << std::endl;
+            if((ip_bate == 1) || (rele == true)) std::cout << std::endl;
         }
-
+        std::cout << "->----------------" << std::endl;
         for(std::vector<std::vector<std::string> >::const_iterator ip = ip_pool.cbegin(); ip != ip_pool.cend(); ++ip)
         {
             auto ip_second = ip->cbegin();
             std::advance(ip_second,1);
             bool rele = false;
+            int num_first, num_second;
             for(std::vector<std::string>::const_iterator ip_part = ip->cbegin(); ip_part != ip->cend(); ++ip_part)
             {                
                 std::string str = *ip_part;
-                int num_first = atoi(str.c_str());
+                num_first = atoi(str.c_str());
                 str = *ip_second;
-                int num_second = atoi(str.c_str());
+                num_second = atoi(str.c_str());
                 if(((num_first == 46) && (num_second == 70)) || (rele == true))
                 {
                     if (ip_part != ip->cbegin())
@@ -181,9 +181,9 @@ for(int a=0; a<1000; ++a)
                 }
                 else break;
             }
-            std::cout << std::endl;
+            if(((num_first == 46) && (num_second == 70)) || (rele == true)) std::cout << std::endl;
         }
-
+        std::cout << "->----------------" << std::endl;
         for(std::vector<std::vector<std::string> >::const_iterator ip = ip_pool.cbegin(); ip != ip_pool.cend(); ++ip)
         {
             std::vector<std::string>::const_iterator ip_num[4];
@@ -206,10 +206,9 @@ for(int a=0; a<1000; ++a)
                         std::cout << ".";
                     }
                 std::cout << num[j];
+                if(j == 3)std::cout << std::endl;
             }
-            std::cout << std::endl;
         }
-
         // 222.173.235.246
         // 222.130.177.64
         // 222.82.198.61
