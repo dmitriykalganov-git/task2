@@ -16,15 +16,8 @@ target_include_directories(ip_filter
     PRIVATE "${CMAKE_BINARY_DIR}"
 )
 
-include(CPack)
-
 set(Boost_INCLUDE_DIR "/usr/include/boost")
 set(Boost_LIBRARIES "/usr/lib/x86_64-linux-gnu")
-
-#if(MINGW)
-#	link_libraries(ws2_32 wsock32)
-#endif()
-
 
 if(WITH_BOOST_TEST)
     find_package(Boost COMPONENTS unit_test_framework REQUIRED)
@@ -70,6 +63,12 @@ else ()
         )
     endif()
 endif()
+
+install(TARGETS ip_filter RUNTIME DESTINATION bin)
+
+set(CPACK_GENERATOR DEB)
+
+include(CPack)
 
 if(WITH_BOOST_TEST)
     enable_testing()
